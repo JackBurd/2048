@@ -1,4 +1,4 @@
-documentWidth = window.screen.availWidth;
+documentWidth = 0.8*window.screen.availWidth;
 gridContainerWidth = 0.92 * documentWidth;
 gridCellWidth = 0.18 * documentWidth;
 gridCellSpace = 0.04 * documentWidth;
