@@ -10,11 +10,11 @@ $(document).ready(function(){
 });
 
 function prepareForMobile(){
-    if(documentWidth > 500){
+    /*if(documentWidth > 500){
         gridContainerWidth = 500;
         gridCellWidth = 100;
         gridCellSpace = 20;
-    }
+    }*/
 
     $("#grid-container").css('width', gridContainerWidth - 2*gridCellSpace);
     $("#grid-container").css('height', gridContainerWidth - 2*gridCellSpace);
