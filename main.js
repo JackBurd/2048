@@ -28,6 +28,8 @@ function prepareForMobile(){
 function  newGame() {
     init();
 
+    alert(documentWidth.toString());
+
     generateOneNumber();
     generateOneNumber();
 }
