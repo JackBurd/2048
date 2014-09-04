@@ -10,11 +10,11 @@ $(document).ready(function(){
 });
 
 function prepareForMobile(){
-    /*if(documentWidth > 500){
+    if(documentWidth > 500){
         gridContainerWidth = 500;
         gridCellWidth = 100;
         gridCellSpace = 20;
-    }*/
+    }
 
     $("#grid-container").css('width', gridContainerWidth - 2*gridCellSpace);
     $("#grid-container").css('height', gridContainerWidth - 2*gridCellSpace);
@@ -23,7 +23,6 @@ function prepareForMobile(){
 
     $(".grid-cell").css('width', gridCellWidth);
     $(".grid-cell").css('height', gridCellWidth);
-   // $(".grid-cell").css('border-radius', 0.02*gridCellWidth);
 }
 
 function  newGame() {
@@ -171,7 +170,7 @@ document.addEventListener('touchend', function(event){
     var deltaX = endX - startX;
     var deltaY = endY - startY;
 
-    if(Math.abs(deltaX) < 0.1*documentWidth && Math.abs(deltaY) < 0.1*documentWidth )
+    if(Math.abs(deltaX) < 0.1*gridContainerWidth && Math.abs(deltaY) < 0.1*gridContainerWidth)
         return;
 
     if(Math.abs(deltaX) >= Math.abs(deltaY)){  //X方向
