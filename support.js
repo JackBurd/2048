@@ -39,6 +39,20 @@ function getNumberColor(number){
     }
 }
 
+function getNumberFontSize(number){
+    var pixel = 0.6 * gridCellWidth;
+    var ratio = 0;
+
+    switch(number.toString().length){
+        case 1:
+        case 2: ratio = 1; break;
+        case 3: ratio = 0.8; break;
+        case 4: ratio = 0.6; break;
+    }
+
+    return (pixel * ratio) + "px";
+}
+
 function noSpace(board){
     for(var i = 0; i < 4; i ++) {
         for (var j = 0; j < 4; j++) {

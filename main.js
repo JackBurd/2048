@@ -81,12 +81,13 @@ function  updateBoardView() {
                 numberCell.text(board[i][j]);
             }
 
+            numberCell.css('font-size', getNumberFontSize(board[i][j]));
+
             hasConflicted[i][j] = false;
         }
     }
 
     $(".number-cell").css('line-height', gridCellWidth + 'px');
-    $(".number-cell").css('font-size', 0.6*gridCellWidth + 'px');
 }
 
 function generateOneNumber(){
@@ -94,27 +95,19 @@ function generateOneNumber(){
         return false;
     }
 
-    /*var list = new Array();
+    var list = new Array();
 
     for(var i = 0; i < 4; i ++) {
         for (var j = 0; j < 4; j ++) {
             if(board[i][j] == 0){
-                list.push(4*i + j);
+                list.push(4 * i + j);
             }
         }
     }
 
     var index = parseInt( Math.floor(Math.random() * list.length));
-    var randX = list[index] / 4;
-    var randY = list[index] % 4;*/
-
-   var randX = -1, randY = -1;
-
-    do{
-        randX = parseInt( Math.floor(Math.random() * 4));
-        randY = parseInt( Math.floor(Math.random() * 4));
-    }while(board[randX][randY] != 0);
-
+    var randX = Math.floor(list[index] / 4);
+    var randY = Math.floor(list[index] % 4);
     var randNumber = Math.random() < 0.8 ? 2 : 4;
     board[randX][randY] = randNumber;
 
