@@ -21,12 +21,10 @@ function getNumberBackgroundColor(number){
         case 64: return "#f65e3b"; break;
         case 128: return "#edcf72"; break;
         case 256: return "#edcc61"; break;
-        case 512: return "#9c0"; break;
-        case 1024: return "#33b5e5"; break;
-        case 2048: return "#09c"; break;
-        case 4096: return "#a6c"; break;
-        case 8192: return "#93c"; break;
-        default: return "black"; break;
+        case 512: return "#edc850"; break;
+        case 1024: return "#edc53f"; break;
+        case 2048: return "#edc22e"; break;
+        default: return "#3c3a32"; break;
     }
 }
 
