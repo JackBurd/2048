@@ -23,7 +23,7 @@ function prepareForMobile(){
 
     $(".grid-cell").css('width', gridCellWidth);
     $(".grid-cell").css('height', gridCellWidth);
-    $(".grid-cell").css('border-radius', 0.02*gridCellWidth);
+   // $(".grid-cell").css('border-radius', 0.02*gridCellWidth);
 }
 
 function  newGame() {
