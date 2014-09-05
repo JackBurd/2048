@@ -69,3 +69,51 @@ header p{
 
     position:absolute;
 }
+
+#shadowLayer{
+    text-align: center;
+    /*background: rgba(237, 194, 46, 0.5);*/
+    background: rgba(238, 228, 218, 0.5);
+    font-weight: bold;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    position: absolute;
+    z-index: 9999;
+    display: none;
+}
+
+.game-message{
+    font-size: 60px;
+    height: 60px;
+    line-height: 60px;
+    margin-top: 222px;
+    margin-bottom: 10px;
+}
+
+.game-action{
+    display: block;
+    margin-top: 60px;
+    font-size: 20px;
+}
+
+a{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.game-action a{
+    display: inline-block;
+    background: #8f7a66;
+    border-radius: 3px;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #f9f6f2;
+    height: 40px;
+    line-height: 42px;
+    margin-left: 9px;
+}
+
+.game-action .score-share{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}

@@ -3,6 +3,8 @@ var hasConflicted = new Array();
 var score = 0;
 var startX, startY;
 var endX, endY;
+var gameResult = 2048;
+var gameFinished = false;
 
 $(document).ready(function(){
     prepareForMobile();
@@ -28,8 +30,9 @@ function prepareForMobile(){
 function  newGame() {
     init();
 
-    generateOneNumber();
-    generateOneNumber();
+    for(var i = 0; i < 2; i ++){
+        generateOneNumber();
+    }
 }
 
 function init(){
@@ -51,6 +54,9 @@ function init(){
     }
 
     score = 0;
+    gameFinished = false;
+
+    $("#shadowLayer").hide();
 
     updateBoardView();
 }
@@ -116,37 +122,39 @@ function generateOneNumber(){
 }
 
 $(document).keydown(function(event){
+    if(gameFinished)  return;
+
     switch(event.keyCode){
         case 37:
             event.preventDefault();
             if(canMoveLeft(board)){
                 moveLeft();
-                setTimeout("generateOneNumber()", 210);
-                setTimeout("isGameOver()", 300);
+                setTimeout("generateOneNumber()", 200);
+                setTimeout("showGameOver()", 300);
             }
             break;
         case 38:
             event.preventDefault();
             if(canMoveUp(board)){
                 moveUp();
-                setTimeout("generateOneNumber()", 210);
-                setTimeout("isGameOver()", 300);
+                setTimeout("generateOneNumber()", 200);
+                setTimeout("showGameOver()", 300);
             }
             break;
         case 39:
             event.preventDefault();
             if(canMoveRight(board)){
                 moveRight();
-                setTimeout("generateOneNumber()", 210);
-                setTimeout("isGameOver()", 300);
+                setTimeout("generateOneNumber()", 200);
+                setTimeout("showGameOver()", 300);
             }
             break;
         case 40:
             event.preventDefault();
             if(canMoveDown(board)){
                 moveDown();
-                setTimeout("generateOneNumber()", 210);
-                setTimeout("isGameOver()", 300);
+                setTimeout("generateOneNumber()", 200);
+                setTimeout("showGameOver()", 300);
             }
             break;
         default:
@@ -164,6 +172,8 @@ document.addEventListener('touchstart', function(event){
 });
 
 document.addEventListener('touchend', function(event){
+    if(gameFinished)  return;
+
     endX = event.changedTouches[0].pageX;
     endY = event.changedTouches[0].pageY;
 
@@ -177,15 +187,15 @@ document.addEventListener('touchend', function(event){
          if(deltaX > 0){
              if(canMoveRight(board)){
                  moveRight();
-                 setTimeout("generateOneNumber()", 210);
-                 setTimeout("isGameOver()", 300);
+                 setTimeout("generateOneNumber()", 200);
+                 setTimeout("showGameOver()", 300);
              }
          }
         else{
              if(canMoveLeft(board)){
                  moveLeft();
-                 setTimeout("generateOneNumber()", 210);
-                 setTimeout("isGameOver()", 300);
+                 setTimeout("generateOneNumber()", 200);
+                 setTimeout("showGameOver()", 300);
              }
          }
     }
@@ -193,25 +203,54 @@ document.addEventListener('touchend', function(event){
         if(deltaY > 0){
             if(canMoveDown(board)){
                 moveDown();
-                setTimeout("generateOneNumber()", 210);
-                setTimeout("isGameOver()", 300);
+                setTimeout("generateOneNumber()", 200);
+                setTimeout("showGameOver()", 300);
             }
         }
         else{
             if(canMoveUp(board)){
                 moveUp();
-                setTimeout("generateOneNumber()", 210);
-                setTimeout("isGameOver()", 300);
+                setTimeout("generateOneNumber()", 200);
+                setTimeout("showGameOver()", 300);
             }
         }
     }
 });
 
-function isGameOver(){
+function showGameOver(){
     if(noSpace(board) && noMove(board)){
-        alert('Game Over');
+        showShadowLayer();
+
+        $(".game-message").css('color', "#776e65");
+        $(".game-message").text("Game Over");
+
+        gameFinished = true;
     }
 }
+
+function showGameWin(number){
+    if(number == gameResult){
+        showShadowLayer();
+
+        $(".game-message").css('color', "#ff7d00");
+        $(".game-message").text("You Win");
+
+        gameFinished = true;
+    }
+}
+
+function showShadowLayer(){
+    $("#shadowLayer").css('top',  $("#grid-container").offset().top);
+    $("#shadowLayer").css('left',  $("#grid-container").offset().left);
+    $("#shadowLayer").css('width', gridContainerWidth);
+    $("#shadowLayer").css('height', gridContainerWidth);
+    $("#shadowLayer").show();
+}
+
+$(window).resize(function(){
+    $("#shadowLayer").css('top',  $("#grid-container").offset().top);
+    $("#shadowLayer").css('left',  $("#grid-container").offset().left);
+});
 
 function  moveLeft() {
     for(var i = 0; i < 4; i ++) {
@@ -231,6 +270,7 @@ function  moveLeft() {
                             board[i][j] = 0;
 
                             score += board[i][k];
+                            setTimeout(showGameWin(board[i][k]), 300);
 
                             hasConflicted[i][k] = true;
                             continue;
@@ -262,6 +302,7 @@ function  moveUp(){
                             board[i][j] = 0;
 
                             score += board[k][j];
+                            setTimeout(showGameWin(board[k][j]), 300);
 
                             hasConflicted[k][j] = true;
                             continue;
@@ -293,6 +334,7 @@ function  moveRight(){
                             board[i][j] = 0;
 
                             score += board[i][k];
+                            setTimeout(showGameWin(board[i][k]), 300);
 
                             hasConflicted[i][k] = true;
                             continue;
@@ -324,6 +366,7 @@ function  moveDown(){
                             board[i][j] = 0;
 
                             score += board[k][j];
+                            setTimeout(showGameWin(board[k][j]), 300);
 
                             hasConflicted[k][j] = true;
                             continue;
